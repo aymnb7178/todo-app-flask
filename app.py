@@ -1,5 +1,7 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+import os
 import uuid
+
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 
 app = Flask(__name__)
 
@@ -36,4 +38,11 @@ def delete_todo(todo_id):
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    # Debug mode and network exposure are opt-in: the Werkzeug debugger must not
+    # be reachable from other machines. Use FLASK_DEBUG=1 / FLASK_HOST=0.0.0.0
+    # only on a trusted local network.
+    app.run(
+        debug=os.environ.get('FLASK_DEBUG') == '1',
+        host=os.environ.get('FLASK_HOST', '127.0.0.1'),
+        port=int(os.environ.get('PORT', '5000')),
+    )
