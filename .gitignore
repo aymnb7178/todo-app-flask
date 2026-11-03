@@ -25,3 +25,5 @@ Thumbs.db
 # Tool caches
 .pytest_cache/
 .ipynb_checkpoints/
+todos.db
+*.db

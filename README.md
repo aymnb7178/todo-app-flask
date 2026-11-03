@@ -1,6 +1,6 @@
 # Todo App (Flask)
 
-A small task-management web app built with Flask and Tailwind CSS, with an Arabic right-to-left interface. It is a working prototype: tasks are kept in memory and are lost when the server restarts.
+A small task-management web app built with Flask and Tailwind CSS, with an Arabic right-to-left interface. Tasks are stored in a local SQLite file, so they survive restarts.
 
 > النسخة العربية: [README.ar.md](README.ar.md)
 
@@ -27,7 +27,8 @@ Add tasks, mark them complete, and delete them from a single page. The page also
 
 ```
 todo-app-flask/
-├── app.py              # Flask application and routes
+├── app.py              # Flask app factory, SQLite storage and routes
+├── tests/              # unit tests (Flask test client, temporary database)
 ├── requirements.txt    # Python dependencies
 └── templates/
     └── index.html      # Single-page Arabic RTL interface
@@ -58,16 +59,23 @@ FLASK_DEBUG=1 python app.py                 # enable debug mode
 FLASK_HOST=0.0.0.0 python app.py            # listen on all interfaces (only on a trusted network)
 ```
 
+## Tests
+
+```bash
+python -m unittest -v     # 8 tests: add / toggle / delete, persistence across app instances,
+                          # blank input, HTML escaping, length limit, SQL-injection attempt
+```
+
+> The SQLite storage and the tests were added with AI assistance (Claude), reviewed and published by the repository owner.
+
 ## Current Limitations
 
-- Tasks are stored in a Python list in memory, so all data is lost on restart.
+- Storage is a single local SQLite file (`todos.db`, override with `TODO_DB`); fine for one user, not a multi-server setup.
 - No user accounts or authentication; all visitors share the same list.
-- No automated tests.
 - The page loads Tailwind CSS and Font Awesome from public CDNs, so it needs an internet connection.
 
 ## Future Improvements
 
-- Persist tasks in SQLite
 - User accounts
 - Deployment guide
 
