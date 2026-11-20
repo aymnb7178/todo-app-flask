@@ -66,8 +66,6 @@ python -m unittest -v     # 8 tests: add / toggle / delete, persistence across a
                           # blank input, HTML escaping, length limit, SQL-injection attempt
 ```
 
-> The SQLite storage and the tests were added with AI assistance (Claude), reviewed and published by the repository owner.
-
 ## Current Limitations
 
 - Storage is a single local SQLite file (`todos.db`, override with `TODO_DB`); fine for one user, not a multi-server setup.
@@ -78,10 +76,6 @@ python -m unittest -v     # 8 tests: add / toggle / delete, persistence across a
 
 - User accounts
 - Deployment guide
-
-## Credits
-
-The interface text credits Grok for the design (`صمم بواسطة Grok`), and that attribution is kept as it was in the original project.
 
 ## Author
 
